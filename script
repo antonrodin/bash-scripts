@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+BUCKET=azrodin-demo
+PARAM=$1
+
+echo "Hola Amigo Me cago en tus pelotillas"
+
+echo "Listar buckets: "
+echo "--------------------------"
+
+aws s3 ls
+
+echo "Listar todos los archivos en el bucket"
+echo "--------------------------"
+aws s3 ls s3://${BUCKET}
+
+echo "Lista bucket-parametro: "
+echo "--------------------------"
+aws s3 ls s3://${PARAM}

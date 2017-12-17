@@ -1,0 +1,8 @@
+#!/bin/bash
+
+echo "Renombrar archivos"
+echo "------------------"
+
+for f in *; do
+	mv -n "$f" "${f/low-}";
+done

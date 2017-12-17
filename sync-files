@@ -1,0 +1,7 @@
+!#/bin/bash
+
+echo "Sync Files with Bucket"
+echo "----------------------"
+
+aws s3 rm s3://images.jacksonlive.es/test/low/ --recursive
+aws s3 sync . s3://images.jacksonlive.es/test/low/  --cache-control "max-age=3153600" --expires="Sun, 15 Feb 2038 12:00:00 GMT" --acl="public-read"
