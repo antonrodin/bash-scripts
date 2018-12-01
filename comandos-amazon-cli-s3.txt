@@ -5,6 +5,9 @@ aws configure
 #List Buckets
 aws s3 ls
 
+#List archivos en el Amazon AWS
+aws s3 ls s3://azrodin-demo
+
 #Create Bucket:
 aws s3 mb s3://azrodin-test
 
@@ -15,8 +18,11 @@ aws s3 rb s3://azrodin-test --force (Force remove)
 #Copiar archivo al bucket
 aws s3 cp style.css s3://azrodin-demo
 
-#List archivos en el Amazon AWS
-aws s3 ls s3://azrodin-demo
+#Copiar archivo desde bucket
+aws s3 cp s3://azrodin-demo/archivo.text archivo.txt
+
+#Copiar desde S3 hacia un directorio
+aws s3 cp s3://azrodin-demo/directorio ./directorio-local/ --recursive
 
 #Sincronizar carpeta con el bucket... (Tremendo comando)
 aws s3 sync . s3://azrodin-demo
@@ -35,8 +41,13 @@ aws s3 ls s3://azrodin-demo/ --recursive | awk 'BEGIN {total=0}{total+=$3}END{pr
 # CloudFront
 #
 
-#List all distrbuitions and get ID for further steps
+# List all distrbuitions and get ID for further steps
 aws cloudfront list-distributions
 
-#InvalidateAllFiles
+# InvalidateAllFiles
 aws cloudfront create-invalidation --distribution-id=S11A16G5KZMEQD --paths /
+
+# Ejemplo de como invalidar un archivo en el CloudFront, es decir...
+# Si temos un style.css y queremos "sustiruirlo" dentro del cache:
+aws cloudfront create-invalidation --distribution-id {EXAMPLE_ID_GET_FROM_CLODFRONT} --paths /css/style.js
+
