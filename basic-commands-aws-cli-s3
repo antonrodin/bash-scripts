@@ -36,18 +36,3 @@ aws s3 sync $LOCAL s3://$REMOTE --cache-control "max-age=3153600" --expires="Sun
 
 #Tamaño de los archivos en el Bucket
 aws s3 ls s3://azrodin-demo/ --recursive | awk 'BEGIN {total=0}{total+=$3}END{print total/1024/1024" MB"}'
-
-#
-# CloudFront
-#
-
-# List all distrbuitions and get ID for further steps
-aws cloudfront list-distributions
-
-# InvalidateAllFiles
-aws cloudfront create-invalidation --distribution-id=S11A16G5KZMEQD --paths /
-
-# Ejemplo de como invalidar un archivo en el CloudFront, es decir...
-# Si temos un style.css y queremos "sustiruirlo" dentro del cache:
-aws cloudfront create-invalidation --distribution-id {EXAMPLE_ID_GET_FROM_CLODFRONT} --paths /css/style.js
-

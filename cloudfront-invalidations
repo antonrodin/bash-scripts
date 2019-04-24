@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# You should know your Cloudfront Id, it looks like that: "ASDX343SDFSD"
+# You should have permission for handle CloudFront in your AWS user.
+# Docs https://docs.aws.amazon.com/cli/latest/reference/cloudfront/create-invalidation.html
+
+# List all distrbuitions and get Cloudfront ID for further steps
+aws cloudfront list-distributions
+
+# Invalidate ALL files
+aws cloudfront create-invalidation --distribution-id XXXXXXXXX --paths /
+
+# Invalidate ONE file css/app.css
+aws cloudfront create-invalidation --distribution-id XXXXXXXXXX --paths /css/app.css
+
+# Invalidate MULTIPLE files
+aws cloudfront create-invalidation --distribution-id S11A16G5KZMEQD \ --paths /index.html /error.html
